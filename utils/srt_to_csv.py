@@ -11,7 +11,7 @@ import pandas
 def srt_to_csv(in_dir, out_dir):
     '''
     Recursively finds srt files in `in_dir` and writes csv for each file.
-    Each subtitle will have three cols: `start_time`, `end_time`, `dialogues`
+    Each subtitle will have three cols: `start_time`, `end_time`, `dialogue`
     '''
 
     newline_charset = "(\r\n|\r|\n)"
@@ -29,15 +29,15 @@ def srt_to_csv(in_dir, out_dir):
                     srt_data = in_.read()
 
                 df_dict = {
-                    "start_times": [],
-                    "end_times": [],
-                    "dialogues": []
+                    "start_time": [],
+                    "end_time": [],
+                    "dialogue": []
                 }
                 for match in re.finditer(SRT_PATTERN, srt_data, re.MULTILINE):
                     # pdb.set_trace()
-                    df_dict["start_times"].append(match.group("start_time"))
-                    df_dict["end_times"].append(match.group("end_time"))
-                    df_dict["dialogues"].append(match.group("multiline_dialogue"))
+                    df_dict["start_time"].append(match.group("start_time"))
+                    df_dict["end_time"].append(match.group("end_time"))
+                    df_dict["dialogue"].append(match.group("multiline_dialogue"))
 
                 df = pandas.DataFrame(df_dict)
                 frame_count, _ = df.shape
