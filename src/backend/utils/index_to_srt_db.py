@@ -60,6 +60,7 @@ def index_to_db(srt_dir, mongo_server_string, verbose):
                 subs_data = df.to_dict(orient='records')
                 # Add media_id to uniquely identify each row through-out the media
                 for data in subs_data:
+                    data["media_name"] = file[:-4]
                     data["media_path"] = file_path
 
                 for data in subs_data:

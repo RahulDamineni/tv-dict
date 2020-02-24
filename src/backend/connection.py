@@ -1,6 +1,7 @@
 import pymongo
 
 default_connection = "mongodb://localhost:27017/"
+gcs_url_template = "https://storage.googleapis.com/storage-tvdict/{path}.mp4"
 
 
 class SubtitlesDB(object):

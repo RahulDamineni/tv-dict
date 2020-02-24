@@ -28,7 +28,8 @@ export default class ResultsCanvas extends React.Component {
     this.setState({
       playVideo: true,
       clicks: this.state.clicks + 1,
-      videoObject: this.state.sampleVideo
+      // videoObject: this.state.sampleVideo
+      videoObject: item.videoObject
     })
     this.forceUpdate();
   }
