@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
-
+import ResultsCanvas from './Results';
 
 export default class Search extends React.Component {
 
@@ -35,7 +35,7 @@ export default class Search extends React.Component {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': "*",
+          // 'Access-Control-Allow-Origin': "*",
         },
         body: JSON.stringify({
           query: this.state.value,
@@ -53,26 +53,12 @@ export default class Search extends React.Component {
     }
    }
 
-   populateMatches(){
-
-     return (
-       <ul>
-         {this.state.matches.map((item, index) => (
-           <li>[{item.media_path}]
-             [{item.start_time} --> {item.end_time}]
-             | {item.dialogue} </li>
-         ))}
-       </ul>
-     )
-
-
-   }
 
    render(){
 
-     let matches;
+     let results_canvas;
      if (this.state.showMatches) {
-       matches = this.populateMatches()
+       results_canvas = <ResultsCanvas matches={this.state.matches}/>
      }
       return(
         <div>
@@ -86,7 +72,7 @@ export default class Search extends React.Component {
               size="medium"
               variant="outlined"
               fullWidth={true} />
-            {matches}
+            {results_canvas}
         </div>
       )
    }

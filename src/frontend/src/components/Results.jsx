@@ -41,7 +41,8 @@ export default class ResultsCanvas extends React.Component {
 
       <ul>
         {this.props.matches.map((item, index) => (
-          <a style={{cursor: "pointer"}} onClick={(item) => this.launchPlayer(item)}>
+          <a style={{cursor: "pointer"}}
+              onClick={(item) => this.launchPlayer(item)}>
             <li>
               [{item.media_path}]
               [{item.start_time} --> {item.end_time}]
@@ -61,7 +62,10 @@ export default class ResultsCanvas extends React.Component {
 
     let videoPlayer;
     if (this.state.playVideo) {
-      videoPlayer = <Player reopen={this.state.clicks} video={this.state.videoObject}/>
+      videoPlayer = <Player
+                        key={this.state.clicks}
+                        video={this.state.videoObject}
+                    />
     }
 
     return <div>
