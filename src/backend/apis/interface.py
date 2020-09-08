@@ -15,4 +15,5 @@ def index():
 
 app.route("/search", methods=["POST"])(
     cross_origin(supports_credentials=True)
-    (search))
+    (search)
+)
