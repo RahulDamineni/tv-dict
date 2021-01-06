@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  database:
+    image: "mongo"
+    volumes:
+      - ./data/db:/data/db
+    ports: 
+      - "27017:27017"  # For debugging with MongoDB Compass
+    networks:
+      - common
+
+  backend:
+    build: ./src/backend/
+    image: gcr.io/tv-dict/backend
+    volumes:
+      - ./data:/tv_dict/data
+    links:
+      - database
+    ports: 
+      - 5000:5000
+    networks:
+      - common
+
+  frontend:
+    build: ./src/frontend/
+    image: gcr.io/tv-dict/frontend
+    volumes:
+      - ./data:/tv_dict/data
+    links:
+      - database
+      - backend
+    environment:
+      BACKEND_HOST: backend
+      BACKEND_PORT: 5000
+    ports:
+      - 80:3000
+    networks:
+      - common
+
+networks:
+  common:
+    driver: bridge
